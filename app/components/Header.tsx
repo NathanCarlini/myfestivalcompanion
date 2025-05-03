@@ -20,6 +20,7 @@ export default function Header() {
   // if (isLoading == true) return <p>Loading...</p>; 
   return (
     <header className="h-headerSize bg-MainColor text-white flex justify-between items-center px-4">
+      <Link href="/">
       <div className="flex gap-4 flex-row items-center">
         <img
           className="h-iconSize aspect-square"
@@ -28,6 +29,7 @@ export default function Header() {
         />
         <p className="font-bold text-xl">My Festival Companion</p>
       </div>
+      </Link>
       <div className="flex gap-4 flex-row">
         <a href="/search">
           <img
@@ -43,7 +45,7 @@ export default function Header() {
             />
           </a>
         ) : ( */}
-          <a href="/login">
+          <a href="/auth">
             <img
               className="h-iconSize aspect-square"
               src="/assets/mdi_account-outline.png"

@@ -2,18 +2,22 @@
 import { useSession } from 'next-auth/react';
 
 const UserProfile = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  if (session) {
-    return (
-      <div>
-        <h1>Bienvenue, {session.user?.name}</h1>
-        <p>Email: {session.user?.email}</p>
-      </div>
-    );
+if (status === 'loading') {
+    return <div>Loading...</div>;
   }
 
-  return <p>Vous n'êtes pas connecté.</p>;
+  if (!session) {
+    return <div>You are not logged in</div>;
+  }
+
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <p>Welcome {session.user.name}</p>
+      <p>Email: {session.user.email}</p>
+    </div>
+  );
 };
 
 export default UserProfile;

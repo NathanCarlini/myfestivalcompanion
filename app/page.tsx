@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "./components/Header";
 import Map from "./components/Map";
+import Link from "next/link";
+
 import MapComponent from "./components/Map";
 
 export default function Home() {
@@ -10,17 +12,19 @@ export default function Home() {
   const [Fest, setFest] = useState([]);
   const [Cat, setCat] = useState([]);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+    const router = useRouter();
+  
   const handleMapInstance = (instance: L.Map) => {
     setMapInstance(instance);
   };
   useEffect(() => {
-    const getFestivals = async () => {
-      const resStats = await fetch(`/api/getfestivalsmap`, {
-        method: "GET",
-      });
-      let dataFestivals = await resStats.json();
-      setFest(dataFestivals);
-    };
+    // const getFestivals = async () => {
+    //   const resStats = await fetch(`/api/getfestivalsmap`, {
+    //     method: "GET",
+    //   });
+    //   let dataFestivals = await resStats.json();
+    //   setFest(dataFestivals);
+    // };
     const getCategories = async () => {
       const resStats = await fetch(`/api/getcategories`, {
         method: "GET",
@@ -29,7 +33,8 @@ export default function Home() {
       setCat(dataFestivals);
       setLoading(false);
     };
-    getFestivals(), getCategories();
+    // getFestivals(), 
+    getCategories();
   }, []);
   if (isLoading) return <p>Loading...</p>;
   return (
@@ -49,11 +54,8 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <p className="font-medium text-xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-              voluptatibus culpa odit laboriosam quidem, dignissimos dolor ut
-              nisi fugit exercitationem voluptate nemo beatae saepe quisquam
-              commodi. Quam ad explicabo ex.
+            <p className="font-medium text-2xl p-5 text-gray-800 text-justify">
+            Découvrez notre site dédié à la découverte des festivals ! Que vous soyez passionné de littérature, de musique, de cinéma ou d'arts vivants, nous recensons les événements incontournables de chaque domaine. Trouvez rapidement des festivals près de chez vous ou à l'international grâce à notre interface simple et intuitive. Restez informé des dernières tendances culturelles et ne manquez aucune manifestation. Votre agenda culturel n'a jamais été aussi complet !
             </p>
           </div>
         </div>
@@ -64,17 +66,25 @@ export default function Home() {
           <div className="flex flex-row gap-3 flex-wrap grow w-full max-h-full">
             {Cat != null
               ? Cat.map((element, index) => (
-                  <div
-                    key={index}
-                    className={`basis-1/4 grow rounded-lg flex flex-row justify-center items-center bg-blue-700 bg-cover h-[10vh]`}
-                  >
-                    {/* <h3 className="font-semibold text-white">{element.name}</h3> */}
-                  </div>
+                <Link href={`categories/${element.image}`} className={`basis-1/4 grow rounded-lg flex flex-row justify-center items-center border border-gray-900 bg-cover h-[10vh] overflow-hidden backdrop-blur-md`}>
+                    <div
+                      key={index}
+                      className="relative flex justify-center items-center h-full w-full"
+                    >
+                      <img
+                      src={`/assets/${element.image}.png`}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      <h3 className="relative font-semibold text-black bg-white/70 px-2 py-1 rounded">
+                      {element.name}
+                      </h3>
+                    </div>
+                    </Link>
                 ))
               : null}
           </div>
         </div>
-        <div className="map h-[80vh] w-full flex flex-col justify-center items-center">
+        <div className="map h-[70vh] w-full flex flex-col justify-start items-center">
           <nav className="w-[90%] h-10vh flex flex-row justify-between items-start p-4 border border-stone-500">
             <img
               src="/assets/magnifying-glass.png"

@@ -11,15 +11,15 @@ export async function GET() {
 }
 
 export async function POST(argandvalues: Array<Object>){
+  console.log(argandvalues)
   let query = `SELECT * FROM festival WHERE `;
   argandvalues != null ? argandvalues.forEach((element)  => {
       var cond = `${Object.keys(element)[0] = Object.values(element)[0]}`
       if (argandvalues.length > 1 && argandvalues.indexOf(element) < argandvalues.length - 1) {
         cond += ` AND `
     }
-    query += cond + ` ;`
-  }) : query = `SELECT * FROM festival ;`;
-
+    query += cond + ` LIMIT 20 ;`
+  }) : query = `SELECT * FROM festival ;`;  
   const festivalBulkMapInfos = await connection.query(query);
    
   return  NextResponse.json(festivalBulkMapInfos.rows);
