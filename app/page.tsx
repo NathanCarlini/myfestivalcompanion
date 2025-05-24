@@ -11,6 +11,8 @@ export default function Home() {
   const [isLoading, setLoading] = useState(true);
   const [Fest, setFest] = useState([]);
   const [Cat, setCat] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
     const router = useRouter();
   
@@ -18,13 +20,6 @@ export default function Home() {
     setMapInstance(instance);
   };
   useEffect(() => {
-    // const getFestivals = async () => {
-    //   const resStats = await fetch(`/api/getfestivalsmap`, {
-    //     method: "GET",
-    //   });
-    //   let dataFestivals = await resStats.json();
-    //   setFest(dataFestivals);
-    // };
     const getCategories = async () => {
       const resStats = await fetch(`/api/getcategories`, {
         method: "GET",
@@ -33,9 +28,10 @@ export default function Home() {
       setCat(dataFestivals);
       setLoading(false);
     };
-    // getFestivals(), 
     getCategories();
   }, []);
+
+
   if (isLoading) return <p>Loading...</p>;
   return (
     <>
@@ -85,12 +81,18 @@ export default function Home() {
           </div>
         </div>
         <div className="map h-[70vh] w-full flex flex-col justify-start items-center">
-          <nav className="w-[90%] h-10vh flex flex-row justify-between items-start p-4 border border-stone-500">
+          <nav className="w-[90%] h-10vh flex flex-row items-start p-4 border border-stone-500">
             <img
               src="/assets/magnifying-glass.png"
               className="h-iconSize aspect-square"
             />
-          </nav>
+            <input
+              type="text"
+              className="border rounded px-3 py-1 w-1/2"
+              placeholder="Rechercher un festival..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />          </nav>
           {/*research zone*/}
           <nav className=""> </nav> {/*filter zone*/}
           <div className="w-[90vw] h-[25vh] border border-blue-500 ">

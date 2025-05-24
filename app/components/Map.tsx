@@ -2,7 +2,7 @@
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import "leaflet.heat";
+import HeatLayer from "leaflet.heat";
 import proj4 from 'proj4';
 import { useEffect, useRef, useState } from "react";
 import 'leaflet/dist/leaflet.css';
@@ -20,9 +20,7 @@ function convertXYToLatLon(x: number, y: number): { latitude: number, longitude:
 }
 
 function MapComponent() {
-  // const [isLoading, setLoading] = useState(true);
   const mapRef = useRef<HTMLDivElement>(null);
-  // const [heatLayer, setHeatLayer] = useState<L.HeatLayer | null>(null);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -56,10 +54,11 @@ function MapComponent() {
 
 
     const leafIcon = new LeafIcon();
+    const heatPoints: [number, number, number][] = []; // Array for heatmap points
+
+    
      pinpointslist.forEach((point) => {
       if(point.geocodageXY.split(",")[1]){
-        // let coords = convertXYToLatLon(parseFloat(point.geocodageXY.split(",")[0]), parseFloat((point.geocodageXY.split(",")[1])));        
-
         const marker = L.marker([
           point.geocodageXY               ? parseFloat(point.geocodageXY.split(",")[0])
             : 0,
@@ -67,8 +66,18 @@ function MapComponent() {
             : 0,
         ], {icon: leafIcon}).addTo(map);      
         marker.bindPopup(point["\ufeffnomfestival"]);
+
+        heatPoints.push([point.latitude, point.longitude, 1]); // Intensity is set to 1 by default
       }        
       });
+
+
+      const heatLayer = L.heatLayer(heatPoints, {
+        radius: 25,
+        blur: 15,
+        maxZoom: 17,
+      });
+      heatLayer.addTo(map);
     }
 
     pinpointer();

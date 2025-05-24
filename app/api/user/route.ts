@@ -15,7 +15,7 @@ export async function createUser(name: string, email: string, password: string, 
     }
   //  console.log(festivalBulkList.rows)
 }
-export async function getUser() {
+export async function POST() {
     
     const cookieStore = await cookies();
     const verif =  cookieStore.get('isUserLoggedIn');

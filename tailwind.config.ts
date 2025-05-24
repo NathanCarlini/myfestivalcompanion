@@ -23,7 +23,7 @@ const config: Config = {
         'Music' : "url('/assets/Music.png')",
         'Multi' : "url('/assets/Multi.png')",
         'Books' : "url('/assets/Books.png')",
-        'Clown' : "url('/assets/Clown.png')",
+        'Clown' : "url('/assets/Spectacle.png')",
         'Cinema' : "url('/assets/Cinema.png')",
         'VisArt' : "url('/assets/VisArt.png')",
       }

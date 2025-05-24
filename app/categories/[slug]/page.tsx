@@ -24,7 +24,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ cat: "musique" }),
+          body: JSON.stringify({ cat: params.slug }),
         });
         if (!resStats.ok) {
           throw new Error("Erreur dans la requête");
@@ -51,22 +51,51 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-white flex flex-col p-5 min-h-[85vh]">
-      <h1 className="text-black font-bold text-3xl text-center"> Festivals de {params.slug} </h1>
-    <div className="flex flex-col justify-center items-center ">
-      <div className="w-full flex flex-col gap-3">
-        {festi.slice(0, nbFest).map((festival, index) => (
-          <div key={index} className="festival-item flex flex-row justify-between font-normal ">
-            <Link href={`/festival/${festival.identifiant}`}><p className="text-black font-semibold text-2xl">{festival["\ufeffnomfestival"]}</p></Link>
-            <p className="text-black text-2xl">{festival.musique}</p>
-          </div>
-        ))}
+      <div
+        className="relative flex justify-center items-center h-[10vh] w-full top-0"
+      >
+        <img
+          src={`/assets/${params.slug}.png`}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <h3 className="relative font-semibold text-black bg-white/70 px-2 py-1 rounded">
+          Festivals de {params.slug}
+        </h3>
       </div>
-      {nbFest < festi.length && (
-        <button onClick={loadMore} className="mt-4 p-2 bg-blue-500 text-white rounded">
-          Afficher plus
-        </button>
-      )}
-    </div>
+      <div className="flex flex-col justify-center items-center mt-10">
+        <div className="w-full flex flex-col gap-3">
+          <div className="flex flex-row justify-around text-black text-center">
+            <p>Nom du festival</p>
+            <p>Catégorie</p>
+            <p>Période</p>
+          </div>
+          {festi.slice(0, nbFest).map((festival, index) => (
+            <div
+              key={index}
+              className="festival-item grid grid-cols-3 justify-between font-normal w-full"
+            >
+              <Link href={`/festival/${festival.identifiant}`}>
+                <p className="text-black font-semibold text-2xl">
+                  {festival["\ufeffnomfestival"]}
+                </p>
+              </Link>
+              <p className="text-black text-xl">{festival[params.slug]}</p>
+              <p className="text-gray-400 text-xl">
+                {festival.periodefestival}
+              </p>
+              
+            </div>
+          ))}
+        </div>
+        {nbFest < festi.length && (
+          <button
+            onClick={loadMore}
+            className="mt-4 p-2 bg-blue-500 text-white rounded"
+          >
+            Afficher plus
+          </button>
+        )}
+      </div>
     </div>
   );
 }
