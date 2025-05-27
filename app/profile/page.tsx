@@ -19,6 +19,19 @@ export default async function Account() {
   }
 
   const account: User = await getUser();
+const getCategories = async () => {
+      const resStats = await fetch(`/api/getUser`, {
+        method: "GET",
+      });
+      let dataFestivals = await resStats.json();
+      setCat(dataFestivals);
+      setLoading(false);
+    };
+    getCategories();
+
+
+
+
   setLoading(false);
 
   if (isLoading) {
