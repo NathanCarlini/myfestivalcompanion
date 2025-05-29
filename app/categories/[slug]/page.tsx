@@ -8,7 +8,6 @@ import Festival from "@/app/Objects/Festival";
 import Link from "next/link";
 
 export default function Page({ params }: { params: { slug: string } }) {
-  // const router = useRouter();
   const [isLoading, setLoading] = useState(true);
   const initialPostList = 10; // Number of articles to display initially
   const incrementInitialPostList = 10; // Number of articles to add each time the "load more" button is clicked
@@ -19,7 +18,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   useEffect(() => {
     try {
       const getCategories = async () => {
-        const resStats = await fetch(`/api/getfestivalsbycat`, {
+        const resStats = await fetch(`/api/selectfestivalsbycat`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

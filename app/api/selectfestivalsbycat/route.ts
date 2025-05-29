@@ -1,13 +1,16 @@
-import Festival from "@/app/Objects/Festival";
 import connection from "@/db/db";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json(); // On récupère le corps de la requête en JSON
-    console.log(data); // Affiche le contenu de la requête
+    const data = await req.json();
 
-    // Exemple d'accès à la donnée "cat"
+    if (!data || !data.cat) {
+      return NextResponse.json(
+        { message: "Catégorie manquante dans la requête" },
+        { status: 400 }
+      );
+    }
     const category = data.cat;
 
     const query = `SELECT * FROM festivalgeo f 
@@ -21,9 +24,8 @@ export async function POST(req: Request) {
     });
     
 
-    // Renvoyer une réponse appropriée
     return NextResponse.json({
-      message: "Données reçues avec succès",
+      message: "Festivals récupérés avec succès",
       data: festivalBulkList.rows,
     });
   } catch (error) {
