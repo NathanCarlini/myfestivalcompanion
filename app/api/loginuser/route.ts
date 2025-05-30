@@ -1,29 +1,50 @@
 import connection from "@/db/db";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-require('dotenv').config();
+import { log } from "console";
+const bcrypt = require("bcrypt");
+
+const verifyPassword = async (plainPassword: string, hashedPassword: string) => {
+  return await bcrypt.compare(plainPassword, hashedPassword);
+};
 
 export async function POST(Request: Request) {
   const { email, password } = await Request.json();
 
-  // Vérification de l'utilisateur existant
-  var query = "SELECT * FROM userinterne WHERE ";
-  query += `Email = '${email}' AND Password = '${password}' ;`;
-  console.log(query);
+  var query = "SELECT * FROM userinterne WHERE LOWER(Email) = LOWER('" + email + "');";
   const resultBulkList = await connection.query(query);
-
-  if (resultBulkList == null || resultBulkList.rows.length === 0) {
-    return NextResponse.json({ success: false, message: "Invalid credentials" });
+  log("Query executed:", resultBulkList.rows);
+  if (!resultBulkList || resultBulkList.rows.length === 0) {
+    return NextResponse.json({
+      success: false,
+      message: "Invalid email",
+    });
   }
 
-  // Génération du JWT
+  const user = resultBulkList.rows[0];
+  log("User found:", user);
+  const passwordOk = await verifyPassword(password, user.password);
+  if (!passwordOk) {
+    return NextResponse.json({
+      success: false,
+      message: "Invalid password",
+    });
+  }
+
   const token = jwt.sign(
     {
       email: email,
-      exp: Math.floor(Date.now() / 1000) + 2 * 60 * 60, // Expiration dans 2 heures
+      exp: Math.floor(Date.now() / 1000) + 2 * 60 * 60 * 60,
     },
-    process.env.SECRET_KEY as string // || (() => { throw new Error("SECRET_KEY is not defined in environment variables"); })()
+    process.env.SECRET_KEY as string
   );
-  // localStorage.setItem("token", token);  
-  return NextResponse.json({ success: true, token });
+
+  const response = NextResponse.json({ success: true, token });
+  response.cookies.set("auth_token", token, {
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: 2 * 60 * 60 * 60,
+    path: "/",
+  });
+  return response;
 }

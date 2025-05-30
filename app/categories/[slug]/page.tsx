@@ -2,7 +2,6 @@
 import { getUser } from "@/app/api/user/route";
 import { useEffect, useState } from "react";
 import User from "@/app/Objects/User";
-import { getConnectionCookie } from "@/app/components/functions";
 import { useRouter } from "next/router";
 import Festival from "@/app/Objects/Festival";
 import Link from "next/link";
