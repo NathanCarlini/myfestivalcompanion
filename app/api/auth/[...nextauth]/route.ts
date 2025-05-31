@@ -1,6 +1,6 @@
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth, { AuthOptions, User } from "next-auth";
-import PostgresAdapter from "C:/Users/natha/Documents/Dev/BachelorCDWM/Projets/MyFestivalCompanion/myfestivalcompanion/app/ProcessFcts/pgAdapter"
+import PostgresAdapter from "app/ProcessFcts/pgAdapter.ts"
 
 
 declare module "next-auth" {

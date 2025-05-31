@@ -67,12 +67,6 @@ export default function Header() {
               src="/assets/mdi_account-outline.png"
             />
           </a>
-          {/* <a href="/accessibility">
-            <img
-              className="h-iconSize aspect-square"
-              src="/assets/ion_accessibility-outline.png"
-            />
-          </a> */}
         </div>
       </header>
       {showDialog && (
@@ -109,12 +103,14 @@ export default function Header() {
                     className="flex items-center gap-3 p-2 rounded hover:bg-blue-50 transition"
                     onClick={() => setShowDialog(false)}
                   >
-                    <img
+                    {/* <img
                       src={`/assets/${festival.image || "default.png"}`}
-                      alt={festival["\ufeffnomfestival"]}
+                      alt="Photo"
                       className="w-10 h-10 rounded object-cover border"
-                    />
-                    <span className="font-medium">{festival["\ufeffnomfestival"]}</span>
+                    /> */}
+                    <span className="w-full flex flex-row justify-between font-medium text-lg">{festival["\ufeffnomfestival"]}
+                      <p className="text-gray-500"> {festival.commune}</p>
+                    </span>
                   </Link>
                 ))}
               </div>

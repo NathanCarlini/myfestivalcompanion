@@ -95,7 +95,7 @@ export default function Home() {
             />          </nav>
           {/*research zone*/}
           <nav className=""> </nav> {/*filter zone*/}
-          <div className="w-[90vw] h-[25vh] border border-blue-500 ">
+          <div className="w-[90vw] h-[50vh] border border-blue-500 ">
             <MapComponent onMapInitialized={handleMapInstance} />
             {mapInstance && (
               <p>

@@ -69,7 +69,7 @@ function MapComponent() {
     };
   }, []);
 
-  return <div ref={mapRef} style={{ height: "500px", width: "100%" }} />;
+  return <div ref={mapRef} style={{ height: "750px", width: "100%" }} />;
 }
 
 export default MapComponent;
