@@ -70,21 +70,11 @@ export async function POST(Request: Request) {
   }
 };
 
-  const saltRounds = 10;
-  const hashPassword = async (password : string) => {
-    try {
-      const salt = await bcrypt.genSalt(saltRounds);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      return hashedPassword;
-    } catch (error) {
-      throw error;
-    }
-  };
 
-  const hashedPassword = await hashPassword(password);
+  const FinalHashedPassword = await hashPassword(password);
 
   let query = "INSERT INTO userinterne (name, email, password, createddate, isenable) VALUES";
-  query += `('${name}', '${email}', '${hashedPassword}', NOW(), true);`;
+  query += `('${name}', '${email}', '${FinalHashedPassword}', NOW(), true);`;
   await connection.query(query);
 
   const token = jwt.sign(
