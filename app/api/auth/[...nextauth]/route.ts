@@ -1,6 +1,6 @@
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth, { AuthOptions, User } from "next-auth";
-import PostgresAdapter from "../../ProcessFcts/pgAdapter";
+import PostgresAdapter from "./pgAdapter";
 declare module "next-auth" {
   interface Session {
     accessToken?: string;
