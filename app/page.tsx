@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Header from "./components/Header";
 import Map from "./components/Map";
 import Link from "next/link";
 
@@ -35,7 +34,6 @@ export default function Home() {
   if (isLoading) return <p>Loading...</p>;
   return (
     <>
-      {/* <Header /> */}
       <main className="bg-white text-black flex flex-col items-center justify-center h-full">
         <div>
           <div className="bg-black">

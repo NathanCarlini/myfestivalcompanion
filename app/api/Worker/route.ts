@@ -1,6 +1,4 @@
 import connection from "@/db/db";
-import { verifyGoogleToken } from "@/utils/googletokenverifier";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 function cleaner(texte: string) {
@@ -22,8 +20,8 @@ export async function GET() {
 
   const accountInformations = await connection.query(query);
 
-  let notempty = accountInformations.rows.filter((row) => row.spectacle !== "");
-  let alltypes: Array<String> = [];
+  const notempty = accountInformations.rows.filter((row) => row.spectacle !== "");
+  let alltypes: Array<string> = [];
   alltypes = [];
   let types;
   notempty.forEach((row) => {
@@ -42,7 +40,7 @@ export async function GET() {
       });
     }
   });
-  alltypes.forEach((type: any) => {
+  alltypes.forEach((type: string) => {
     console.log(type);
   });
 

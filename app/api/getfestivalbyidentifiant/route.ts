@@ -1,4 +1,3 @@
-import Festival from "@/app/Objects/Festival";
 import connection from "@/db/db";
 import { NextResponse } from "next/server";
 

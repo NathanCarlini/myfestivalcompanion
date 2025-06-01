@@ -6,7 +6,7 @@ export default function Account() {
   const router = useRouter();
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [favFestivals, setFavFestivals] = useState<any[]>([]);
+  const [favFestivals, setFavFestivals] = useState();
   const [favLoading, setFavLoading] = useState(true);
 
   useEffect(() => {
