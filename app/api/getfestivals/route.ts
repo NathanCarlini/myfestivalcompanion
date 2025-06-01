@@ -25,6 +25,6 @@ export async function POST(
   // const festivalBulkMapInfos = await connection.query(query);
    
   // return  NextResponse.json(festivalBulkMapInfos.rows);
-  return  NextResponse.json(success : true);
+  return  NextResponse.json({success : true});
 
 }
