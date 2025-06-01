@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import proj4 from 'proj4';
 import { useEffect, useRef } from "react";
+import Festival from "@/app/Objects/Festival";
 
 function convertXYToLatLon(x: number, y: number): { latitude: number, longitude: number } {
   var secondProjection = "+proj=lcc +lat_1=29.7 +lat_0=29.7 +lon_0=-5.4 +k_0=0.9996155960000001 +x_0=500000 +y_0=300000 +a=6378249.2 +b=6356515 +towgs84=31,146,47,0,0,0,0 +units=m +no_defs";
@@ -48,14 +49,14 @@ function MapComponent() {
 
       const leafIcon = new LeafIcon();
 
-      pinpointslist.forEach((point) => {
+      pinpointslist.forEach((point : Festival) => {
         if (point.geocodageXY && point.geocodageXY.split(",")[1]) {
           const lat = parseFloat(point.geocodageXY.split(",")[0]);
           const lon = parseFloat(point.geocodageXY.split(",")[1]);
           const marker = L.marker([lat, lon], { icon: leafIcon }).addTo(map);
           marker.bindPopup(
             `<a href="/festival/${point.identifiant}" target="_blank" style="color:#2563eb;text-decoration:underline;">
-              ${point["\ufeffnomfestival"]}
+              ${point.festivalname}
             </a>`
           );
         }

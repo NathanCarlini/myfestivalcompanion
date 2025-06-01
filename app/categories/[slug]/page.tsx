@@ -1,5 +1,4 @@
 "use client";
-import { getUser } from "@/app/api/user/route";
 import { useEffect, useState } from "react";
 import User from "@/app/Objects/User";
 import { useRouter } from "next/router";
@@ -67,14 +66,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             <p>Catégorie</p>
             <p>Période</p>
           </div>
-          {festi.slice(0, nbFest).map((festival, index) => (
+          {festi.slice(0, nbFest).map((festival: Festival, index) => (
             <div
               key={index}
               className="festival-item grid grid-cols-3 justify-between font-normal w-full"
             >
               <Link href={`/festival/${festival.identifiant}`}>
                 <p className="text-black font-semibold text-2xl">
-                  {festival["\ufeffnomfestival"]}
+                  {festival.festivalname}
                 </p>
               </Link>
               <p className="text-black text-xl">{festival[params.slug]}</p>

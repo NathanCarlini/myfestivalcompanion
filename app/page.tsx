@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Map from "./components/Map";
 import Link from "next/link";
+import Categorie from "@/app/Objects/Categorie";
 
 import MapComponent from "./components/Map";
 
@@ -15,9 +16,9 @@ export default function Home() {
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
     const router = useRouter();
   
-  const handleMapInstance = (instance: L.Map) => {
-    setMapInstance(instance);
-  };
+  // const handleMapInstance = (instance: L.Map) => {
+  //   setMapInstance(instance);
+  // };
   useEffect(() => {
     const getCategories = async () => {
       const resStats = await fetch(`/api/getcategories`, {
@@ -59,7 +60,7 @@ export default function Home() {
           </h2>
           <div className="flex flex-row gap-3 flex-wrap grow w-full max-h-full">
             {Cat != null
-              ? Cat.map((element, index) => (
+              ? Cat.map((element: Categorie, index) => (
                 <Link href={`categories/${element.image}`} className={`basis-1/4 grow rounded-lg flex flex-row justify-center items-center border border-gray-900 bg-cover h-[10vh] overflow-hidden backdrop-blur-md`}>
                     <div
                       key={index}
@@ -94,7 +95,7 @@ export default function Home() {
           {/*research zone*/}
           <nav className=""> </nav> {/*filter zone*/}
           <div className="w-[90vw] h-[50vh] border border-blue-500 ">
-            <MapComponent onMapInitialized={handleMapInstance} />
+            <MapComponent/>
             {mapInstance && (
               <p>
                 Carte initialisée ! Vous pouvez maintenant interagir avec

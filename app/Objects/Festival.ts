@@ -1,22 +1,23 @@
-import { DateTime } from "next-auth/providers/kakao"
-
 export default class Festival {
-    
-    readonly timesampmodification : Date;
-    idfestival! : number;
-    name! : string;
-    description! : string;
-    password! : string;
-    festivalstartdate! : DateTime;
-    festivalenddate! : DateTime;
-    creationdate! : DateTime;
-    deletiondate! : DateTime;
-    editdate! : DateTime;
-    siteinternet! : string;
-    latitude! : number;
-    longitude! : number;
-
-    constructor(){
-        this.timesampmodification = new Date();
-    }
+  festivalname!: string;
+  region!: string;
+  departement!: string;
+  commune!: string;
+  codepostal!: number;
+  codeinsee!: string;
+  siteinternet!: string;
+  email!: string;
+  anneecreation!: string;
+  typefestival!: string;
+  spectacle!: string;
+  musique!: string;
+  musiqueCNM!: string;
+  cinema!: string;
+  artsvisuels!: string;
+  litterature!: string;
+  periodefestival!: string;
+  identifiant!: string;
+  geocodageXY!: string;
+  festivallist_id!: number;
+  [key: string]: any;
 }

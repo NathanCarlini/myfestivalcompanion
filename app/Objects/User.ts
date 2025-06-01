@@ -10,7 +10,7 @@ export default class User {
     deletiondate! : DateTime;
     editdate! : DateTime;
     isverified! : boolean;
-    imageprofil! : string
+    image! : string
 
     constructor(){
         this.timesampmodification = new Date();

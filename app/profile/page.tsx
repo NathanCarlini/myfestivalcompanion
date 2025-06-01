@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import User from "@/app/Objects/User";
 
 export default function Account() {
   const router = useRouter();
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [favFestivals, setFavFestivals] = useState();
+const [user, setUser] = useState<User | null>(null);
+const [favFestivals, setFavFestivals] = useState<any[]>([]);
   const [favLoading, setFavLoading] = useState(true);
 
   useEffect(() => {
@@ -99,7 +100,7 @@ export default function Account() {
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Vos festivals sauvegardés</h2>
         {favLoading ? (
           <div className="text-gray-500">Chargement...</div>
-        ) : favFestivals.length === 0 ? (
+        ) : !favFestivals || favFestivals.length === 0 ? (
           <div className="text-gray-400">Aucun festival sauvegardé.</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -108,11 +109,11 @@ export default function Account() {
                 <div className="flex items-center gap-3 mb-2">
                   <img
                     src={`/assets/${festival.image || "default.png"}`}
-                    alt={festival["\ufeffnomfestival"]}
+                    alt={festival.festivalname}
                     className="w-12 h-12 rounded object-cover border"
                   />
                   <div>
-                    <div className="font-semibold text-lg">{festival["\ufeffnomfestival"]}</div>
+                    <div className="font-semibold text-lg">{festival.festivalname}</div>
                     <div className="text-gray-500 text-sm">{festival.periodefestival}</div>
                   </div>
                 </div>

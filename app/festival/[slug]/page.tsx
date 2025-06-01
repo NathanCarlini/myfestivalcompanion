@@ -47,7 +47,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <main className="bg-white text-black flex flex-col h-[90vh]">
       <div className="flex flex-row items-center mt-8 pl-8 h-16 w-[30vw] text-left gap-4">
-        <h1 className="text-4xl font-semibold">{Fest["\ufeffnomfestival"]}</h1>
+        <h1 className="text-4xl font-semibold">{Fest.festivalname}</h1>
         {/* Icône étoile */}
         <button
           onClick={handleFavorite}
@@ -86,7 +86,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
         <div className="flex-1 min-w-[300px] max-w-[500px]">
-          <FestivalMap geocodageXY={Fest.geocodageXY} nomFestival={Fest["\ufeffnomfestival"]} />
+          <FestivalMap geocodageXY={Fest.geocodageXY} nomFestival={Fest.festivalname} />
         </div>
       </div>
     </main>

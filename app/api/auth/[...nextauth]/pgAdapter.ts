@@ -73,8 +73,8 @@ export default function PostgresAdapter() {
     },
 
     async deleteSession(sessionToken: string) {
-      const res = await connection.query(`DELETE FROM sessions WHERE session_token = $1`, [sessionToken]);
-      return res.rowCount > 0 ?  res.rowCount : null;
+      await connection.query(`DELETE FROM sessions WHERE session_token = $1`, [sessionToken]);
+      // Adapter attend void | null | undefined
     },
   };
 }

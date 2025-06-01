@@ -108,7 +108,7 @@ export default function Header() {
                       alt="Photo"
                       className="w-10 h-10 rounded object-cover border"
                     /> */}
-                    <span className="w-full flex flex-row justify-between font-medium text-lg">{festival["\ufeffnomfestival"]}
+                    <span className="w-full flex flex-row justify-between font-medium text-lg">{festival.festivalname}
                       <p className="text-gray-500"> {festival.commune}</p>
                     </span>
                   </Link>
