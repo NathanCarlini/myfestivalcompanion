@@ -2,7 +2,7 @@
 import connection from "@/db/db";
 
 
-export function PostgresAdapter() {
+export default function PostgresAdapter() {
   return {
     async createUser(profile: any) {
       const { email, name, image } = profile;
