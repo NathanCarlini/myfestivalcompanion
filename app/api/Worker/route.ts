@@ -40,14 +40,7 @@ export async function GET() {
       });
     }
   });
-  alltypes.forEach((type: string) => {
-    console.log(type);
-  });
 
-  console.log(
-    "smldkfmlsdkfmsdkflkmfksdmlfksmlkdfsmldkfmlskdfmlskdfksdmlfksdmlfksmdlkfsmlkdfmlsdkfmlk"
-  );
-  console.log(alltypes);
 
   return NextResponse.json(true);
 }

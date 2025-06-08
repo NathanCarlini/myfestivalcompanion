@@ -1,4 +1,14 @@
-import FestivalMap from "./FestivalMap";
+"use client"
+import dynamic from 'next/dynamic';
+
+interface FestivalMapProps {
+  geocodageXY: string;
+  nomFestival: string;
+}
+
+const FestivalMap = dynamic<FestivalMapProps>(() => import('./FestivalMap'), {
+  ssr: false,
+});
 
 interface FestivalProps {
   nomFestival: string;
@@ -14,7 +24,9 @@ export default function FestivalInfo({
   periode,
   typefestival,
   geocodageXY,
-}: FestivalProps) {
+
+}: FestivalProps)
+ {
   return (
     <div className="max-w-xl mx-auto bg-white rounded-xl shadow-md p-6">
       <h2 className="text-2xl font-bold mb-2">{nomFestival}</h2>

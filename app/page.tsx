@@ -5,7 +5,12 @@ import Map from "./components/Map";
 import Link from "next/link";
 import Categorie from "@/app/Objects/Categorie";
 
-import MapComponent from "./components/Map";
+// import MapComponent from "./components/Map";
+import dynamic from 'next/dynamic';
+
+const MapComponent = dynamic(() => import('./components/Map'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [isLoading, setLoading] = useState(true);

@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     SELECT *
     FROM festivalgeo
     WHERE
-        regexp_replace(unaccent(LOWER(festivalgeo.﻿nomfestival)), '[^a-z0-9]', '', 'g')
+        regexp_replace(unaccent(LOWER(festivalgeo.festivalname)), '[^a-z0-9]', '', 'g')
         LIKE '%' || format_search_string('%${query}%') || '%'
     LIMIT 20;
     `;
